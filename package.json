@@ -1,7 +1,7 @@
 {
   "name": "rollup-plugin-auto-external",
   "version": "3.0.0-alpha.0",
-  "description": "Rollup plugin to automatically exclude package.json dependencies and peerDependencies from your bundle",
+  "description": "Rollup plugin to automatically exclude package.json dependencies from your bundle",
   "main": "index.js",
   "scripts": {
     "prepublishOnly": "npm test",
@@ -13,7 +13,8 @@
     "external",
     "auto",
     "dependencies",
-    "peerDependencies"
+    "peerDependencies",
+    "devDependencies"
   ],
   "author": "Steven Benisek <steven.benisek@gmail.com>",
   "homepage": "https://github.com/stevenbenisek/rollup-plugin-auto-external",

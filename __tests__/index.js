@@ -56,6 +56,17 @@ describe('autoExternal(options)', () => {
       { peerDependencies: false }
     ));
 
+  it('should not add devDependencies by default', () =>
+    bundle({
+      input: path.resolve(__dirname, '../__fixtures__/dev-deps/index.js'),
+    }));
+
+  it('should handle enabling devDependencies', () =>
+    bundle(
+      { input: path.resolve(__dirname, '../__fixtures__/dev-deps/index.js') },
+      { devDependencies: true }
+    ));
+
   it('should add builtins by default', () =>
     bundle({
       input: path.resolve(__dirname, '../__fixtures__/builtins/index.js'),

@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/stevenbenisek/rollup-plugin-auto-external.svg?branch=master)](https://travis-ci.org/stevenbenisek/rollup-plugin-auto-external)
 
-> [Rollup](https://rollupjs.org/) plugin to automatically exclude package.json dependencies and peerDependencies from your bundle.
+> [Rollup](https://rollupjs.org/) plugin to automatically exclude package.json dependencies from your bundle.
 
 ## Install
 
@@ -37,6 +37,7 @@ export default {
       dependencies: true,
       packagePath: path.resolve('./packages/module/package.json'),
       peerDependencies: false,
+      devDependencies: false,
     }),
   ],
 };
@@ -90,3 +91,7 @@ Rollup will complain if `builtins` is present, and the build target is a browser
 #### `peerDependencies`
 
 `boolean`: defaults to `true`.
+
+#### `devDependencies`
+
+`boolean`: defaults to `false`.
