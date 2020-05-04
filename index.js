@@ -1,16 +1,17 @@
-const getBuiltins = require('builtins');
-const path = require('path');
-const readPkg = require('read-pkg');
-const safeResolve = require('safe-resolve');
-const semver = require('semver');
+const getBuiltins = require("builtins");
+const path = require("path");
+const readPkg = require("read-pkg");
+const safeResolve = require("safe-resolve");
+const semver = require("semver");
 
 module.exports = ({
   builtins = true,
   dependencies = true,
   packagePath,
   peerDependencies = true,
+  devDependencies = false,
 } = {}) => ({
-  name: 'auto-external',
+  name: "auto-external",
   options(opts) {
     const pkg = readPkg.sync(packagePath);
     let ids = [];
@@ -23,14 +24,18 @@ module.exports = ({
       ids = ids.concat(Object.keys(pkg.peerDependencies));
     }
 
+    if (devDependencies && pkg.devDependencies) {
+      ids = ids.concat(Object.keys(pkg.devDependencies));
+    }
+
     if (builtins) {
       ids = ids.concat(getBuiltins(semver.valid(builtins)));
     }
 
     ids = ids.map(safeResolve).filter(Boolean);
 
-    const external = id => {
-      if (typeof opts.external === 'function' && opts.external(id)) {
+    const external = (id) => {
+      if (typeof opts.external === "function" && opts.external(id)) {
         return true;
       }
 
@@ -50,7 +55,7 @@ module.exports = ({
 
       const resolvedDirname = path.dirname(resolvedPath);
 
-      return ids.some(idx => resolvedDirname.startsWith(path.dirname(idx)));
+      return ids.some((idx) => resolvedDirname.startsWith(path.dirname(idx)));
     };
 
     return Object.assign({}, opts, { external });
